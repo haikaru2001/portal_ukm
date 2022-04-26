@@ -211,9 +211,17 @@
           </li>
           <li class="nav-item">
             <a href="index.php?page=list-user" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-user"></i>
               <p>
                 User
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="index.php?page=list-role" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Role
               </p>
             </a>
           </li>
@@ -246,6 +254,9 @@
             break;
           case 'list-user':
             include "list-user.php";
+            break;
+          case 'list-role':
+            include "list-role.php";
             break;
         }
       }else{
@@ -293,8 +304,7 @@
 <script src="plugins/chart.js/Chart.min.js"></script>
 
 <!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard2.js"></script>
+
 </body>
 </html>
