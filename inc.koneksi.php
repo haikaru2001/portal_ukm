@@ -1,10 +1,11 @@
 <?php
-class Connection{
+
+class koneksi{
+	
    private $host = "localhost";
    private $struser = "root";
    private $strpassword = "";
-   private $strdbname = "portal_ukm";
-   
+   private $strdbname = "ukm_ms";   
    public $connection;
       
 	function __construct() {
@@ -14,9 +15,8 @@ class Connection{
 	function connect()
 	{
 	    $conn = mysqli_connect($this->host,$this->struser, $this->strpassword);
-	 	 mysqli_select_db($conn, $this->strdbname);
-		 $this->connection = $conn;	
+		mysqli_select_db($conn, $this->strdbname);
+		$this->connection = $conn;	
 	}
-
 }
-?>
+?> 

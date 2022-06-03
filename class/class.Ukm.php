@@ -1,6 +1,5 @@
 <?php 
-	
-	class Role extends Connection
+	class Ukm extends koneksi
 	{
 		private $id =0;
 		private $ukm = '';		
@@ -31,7 +30,7 @@
 		}
 		
 		public function Updateukm(){
-			$sql = "UPDATE ukm SET ukm ='$this->ukm'
+			$sql = "UPDATE ukm SET nama ='$this->ukm'
 					WHERE id_ukm = $this->id";
 
 			$this->hasil = mysqli_query($this->connection, $sql);
@@ -43,7 +42,7 @@
 		}
 		
 		public function Deleteukm(){
-			$sql = "DELETE FROM ukm WHERE id_ukm=$this->id";
+			$sql = "DELETE FROM ukm WHERE id_ukm = $this->id";
 			$this->hasil = mysqli_query($this->connection, $sql);
 			
 			if($this->hasil)
@@ -53,7 +52,7 @@
 		}
 		
 		public function SelectAllukm(){
-			$sql = "SELECT * FROM 'ukm'";
+			$sql = "SELECT * FROM ukm";
 				
 			$result = mysqli_query($this->connection, $sql);	
 			$arrResult = Array();
@@ -70,6 +69,8 @@
 			}
 			return $arrResult;			
 		}
+
+		
 		
 		public function SelectOneukm(){
 			$sql = "SELECT * FROM ukm WHERE id_ukm='$this->id'";

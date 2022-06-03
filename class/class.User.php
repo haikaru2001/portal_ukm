@@ -1,20 +1,18 @@
 <?php 
-
-	class User extends Connection
+	class User extends koneksi
 	{
-        private $nim =0; 
-		private $nama='';
+        private $id =''; 
+		private $name='';
 		private $email='';
 		private $password='';			
-		private $role='';
-		private $idrole=0;
-        private $ukm='';
-		private $idukm=0;	
+		private $id_role=0;
+		private $id_ukm=0;
 		private $sex = '';
-        private $telp = '';
+        private $notelp = '';
         private $foto ='';
         private $status = '0';
         private $bio ='';
+		private $sum = 0;
         private $hasil = false;
 
         public function __get($atribute) {
@@ -29,12 +27,11 @@
 			}
 		}
 
-        public function AddAccount(){
-			
-			$sql = "INSERT INTO user(nim, nama, email, sex, notelp, password) 
-		            values ('$this->nim','$this->nama', '$this->email', '$this->sex','$this->telp','$this->password')";
+        public function AddUser(){
+			$this->connect();
+			$sql = "INSERT INTO user(nim, name, email, sex, notelp, pass, id_ukm, id_role) 
+		            values ('$this->id','$this->name', '$this->email', '$this->sex','$this->notelp','$this->password','$this->id_ukm','$this->id_role')";
 			$this->hasil = mysqli_query($this->connection, $sql);
-			$this->nim = $this->connection->insert_id;	
 			
 			if($this->hasil)
 			   $this->message ='Data berhasil ditambahkan!';					
@@ -42,8 +39,9 @@
 			   $this->message ='Data gagal ditambahkan!';
 		}
 
-        public function DeleteAccount(){
-			$sql = "DELETE FROM user WHERE nim=$this->nim";
+        public function DeleteUser(){
+			$this->connect();
+			$sql = "DELETE FROM user WHERE nim=$this->id";
 			$this->hasil = mysqli_query($this->connection, $sql);
 			
 			if($this->hasil)
@@ -53,18 +51,148 @@
 		}
 
 
-        public function Validate($nim){
-			$sql = "SELECT * FROM user WHERE nim='$nim'";    
-			$resultOne = mysqli_query($this->connection, $sql);	
+        public function Validate($id){
+			$this->connect();
+			$sql = "SELECT * FROM user WHERE nim='$id' OR email = '$id'";
+			$resultOne = mysqli_query($this->connection, $sql);
 			if(mysqli_num_rows($resultOne) == 1){
 				$this->hasil = true;
 				$data = mysqli_fetch_assoc($resultOne);
-				$this->nim=$data['nim'];
-				$this->nama = $data['nama'];				
+				$this->id=$data['nim'];
+				$this->name = $data['name'];
 				$this->email=$data['email'];
-				$this->password=$data['password'];										
-				$this->idrole=$data['id_role'];							
+				$this->password=$data['pass'];						
+				$this->id_role=$data['id_role'];
+				$this->id_ukm=$data['id_ukm'];
+				$this->status=$data['status'];
 				return true;		
 			}							
+		}
+
+		public function SelectAllUser(){
+			$this->connect();
+			$sql = "SELECT * FROM user order by id_ukm,nim";
+			$result = mysqli_query($this->connection, $sql) or die(mysqli_error($this->connection));	
+			
+			$arrResult = Array();
+			$i=0;
+			if(mysqli_num_rows($result)>0){
+				while($data = mysqli_fetch_array($result))
+				{
+					$objUser = new User();
+					$objUser->id=$data['nim'];
+					$objUser->name=$data['name'];
+					$objUser->email=$data['email'];
+					$objUser->password=$data['pass'];
+					$objUser->id_role=$data['id_role'];
+					$objUser->id_ukm=$data['id_ukm'];
+					$objUser->status=$data['status'];
+					$objUser->notelp=$data['notelp'];
+					$objUser->sex=$data['sex'];
+					$objUser->foto=$data['foto'];
+					$objUser->bio=$data['bio'];
+					$arrResult[$i] = $objUser;
+					$i++;
+				}
+			}
+			return $arrResult;
+		}
+
+		public function SelectAllUserByUkm($ukm){
+			$this->connect();
+			$sql = "SELECT * FROM user where id_ukm=$ukm order by nim";
+			$result = mysqli_query($this->connection, $sql) or die(mysqli_error($this->connection));	
+			
+			$arrResult = Array();
+			$i=0;
+			if(mysqli_num_rows($result)>0){
+				while($data = mysqli_fetch_array($result))
+				{
+					$objUser = new User();
+					$objUser->id=$data['nim'];
+					$objUser->name=$data['name'];
+					$objUser->email=$data['email'];
+					$objUser->password=$data['pass'];
+					$objUser->id_role=$data['id_role'];
+					$objUser->id_ukm=$data['id_ukm'];
+					$objUser->status=$data['status'];
+					$objUser->notelp=$data['notelp'];
+					$objUser->sex=$data['sex'];
+					$objUser->foto=$data['foto'];
+					$objUser->bio=$data['bio'];
+					$arrResult[$i] = $objUser;
+					$i++;
+				}
+			}
+			return $arrResult;
+		}
+
+		public function SelectAllUserByNim($nim){
+			$this->connect();
+			$sql = "SELECT * FROM user where nim=$nim order by nim";
+			$result = mysqli_query($this->connection, $sql) or die(mysqli_error($this->connection));	
+			
+			$arrResult = Array();
+			$i=0;
+			if(mysqli_num_rows($result)>0){
+				while($data = mysqli_fetch_array($result))
+				{
+					$objUser = new User();
+					$objUser->id=$data['nim'];
+					$objUser->name=$data['name'];
+					$objUser->email=$data['email'];
+					$objUser->password=$data['pass'];
+					$objUser->id_role=$data['id_role'];
+					$objUser->id_ukm=$data['id_ukm'];
+					$objUser->status=$data['status'];
+					$objUser->notelp=$data['notelp'];
+					$objUser->sex=$data['sex'];
+					$objUser->foto=$data['foto'];
+					$objUser->bio=$data['bio'];
+					$arrResult[$i] = $objUser;
+					$i++;
+				}
+			}
+			return $arrResult;
+		}
+
+		public function SelectAllUserByUkmNim($ukm,$nim){
+			$this->connect();
+			$sql = "SELECT * FROM user where nim=$nim AND ukm=$ukm order by nim";
+			$result = mysqli_query($this->connection, $sql) or die(mysqli_error($this->connection));	
+			
+			$arrResult = Array();
+			$i=0;
+			if(mysqli_num_rows($result)>0){
+				while($data = mysqli_fetch_array($result))
+				{
+					$objUser = new User();
+					$objUser->id=$data['nim'];
+					$objUser->name=$data['name'];
+					$objUser->email=$data['email'];
+					$objUser->password=$data['pass'];
+					$objUser->id_role=$data['id_role'];
+					$objUser->id_ukm=$data['id_ukm'];
+					$objUser->status=$data['status'];
+					$objUser->notelp=$data['notelp'];
+					$objUser->sex=$data['sex'];
+					$objUser->foto=$data['foto'];
+					$objUser->bio=$data['bio'];
+					$arrResult[$i] = $objUser;
+					$i++;
+				}
+			}
+			return $arrResult;
+		}
+
+
+		public function countUserByUkm($ukm)
+		{
+			$this->connect();
+			$sql = "SELECT * FROM user where id_ukm = $ukm";
+			$result = mysqli_query($this->connection, $sql);
+			$objsum = new User();
+			$objsum->sum = mysqli_num_rows($result);
+			return $objsum->sum;
 		}
     }

@@ -1,6 +1,5 @@
 <?php 
-	
-	class Role extends Connection
+	class Role extends koneksi
 	{
 		private $id =0;
 		private $role = '';		
@@ -31,7 +30,7 @@
 		}
 		
 		public function UpdateRole(){
-			$sql = "UPDATE role SET role ='$this->role'
+			$sql = "UPDATE role SET nama ='$this->role'
 					WHERE id_role = $this->id";
 
 			$this->hasil = mysqli_query($this->connection, $sql);
@@ -53,7 +52,7 @@
 		}
 		
 		public function SelectAllRole(){
-			$sql = "SELECT * FROM 'role'";
+			$sql = "SELECT * FROM role";
 				
 			$result = mysqli_query($this->connection, $sql);	
 			$arrResult = Array();
