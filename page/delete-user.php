@@ -1,5 +1,5 @@
 <?php
-include('./class/class.User.php');
+include('../class/class.User.php');
 
 if(isset($_GET['id_user'])){	
 	$objUser = new User(); 

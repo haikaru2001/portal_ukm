@@ -291,7 +291,7 @@ if($_SESSION["id_role"] <> 3 && $_SESSION["id_role"] <> 2){
 						echo 'Halaman tidak ditemukan! :(';
 					}
 				} else {
-					include($pages_dir.'/home.php');
+					include($pages_dir.'/home-ketua.php');
 				}
 		?>
  

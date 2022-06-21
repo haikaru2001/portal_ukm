@@ -33,7 +33,7 @@ class Mail
 		$mail->Body = $message;
 		$mail->AltBody = "This is the body in plain text for non-HTML mail clients";
 
-		$mail->SMTPDebug = 2;
+		$mail->SMTPDebug = 1;
 
 		if(!$mail->Send()){
 			echo "Message could not be sent.<p>";

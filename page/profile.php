@@ -25,7 +25,13 @@
                   <?php
 
                   $objUser = new User();
+                  if($_SESSION['id_role'] == 1){
+                    $objUser->SelectAdmin($_SESSION["userid"]);
+                  }
+                  else{
                   $objUser->SelectUserByNim($_SESSION["userid"]);
+                  }
+                  
                   $foto='';
                   $icon='';
                   $gender='';

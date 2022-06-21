@@ -63,7 +63,7 @@
                           $status = '<button class="btn btn-warning"><i class="fas fa-clock"></i> Pending</button>';
                         }
                         else if($bcObj->status == 'r'){
-                          $status = '<button class="btn btn-danger"><i class="fas fa-close"></i> Reject</button>';
+                          $status = '<button class="btn btn-danger"><i class="fas fa-ban"></i> Reject</button>';
                         }
                         else if($bcObj->status == 'a'){
                           $status = '<button class="btn btn-success"><i class="fas fa-check"></i> Approved</button>';
@@ -88,15 +88,14 @@
                           echo '<td>'.$penerima.'</td>';
                           echo '<td>'.$bcObj->date.'</td>';
                           
-                          if($bcObj->status == 'p'){
-                          
-                        ?>
-                          <td><a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ModalEdit<?php echo $bcObj->id; ?>"><i class="fas fa-edit"></i> Edit</a> | <a class="btn btn-danger btn-sm" href="dashboard-ketua.php?page=delete-bc&id_bc=<?php echo $id;?>" name="delete" onclick="return confirm('Apakah anda yakin ingin menghapus?')"><i class="fas fa-trash"></i> Delete</a></td>
-                        
-                        <?php
+                          if($bcObj->status == 'a'){
+                            echo '<td>Tidak bisa melakukan perubahan</td>';
                           }
                           else {
-                            echo '<td>Tidak bisa melakukan perubahan</td>';
+                            ?>
+                            <td><a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ModalEdit<?php echo $bcObj->id; ?>"><i class="fas fa-edit"></i> Edit</a> | <a class="btn btn-danger btn-sm" href="dashboard-ketua.php?page=delete-bc&id_bc=<?php echo $id;?>" name="delete" onclick="return confirm('Apakah anda yakin ingin menghapus?')"><i class="fas fa-trash"></i> Delete</a></td>
+                          
+                          <?php
                           }
                           echo '<td>'.$bcObj->reason.'</td>';
                         ?>

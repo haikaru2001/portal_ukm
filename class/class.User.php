@@ -203,6 +203,27 @@
 			}
 		}
 
+		public function SelectAdmin($nim){
+			$this->connect();
+			$sql = "SELECT a.*, b.nama as nama_role from user a, role b where a.id_role = b.id_role AND nim='$nim' order by nim";
+			$result = mysqli_query($this->connection, $sql) or die(mysqli_error($this->connection));	
+			
+			if(mysqli_num_rows($result)==1){
+				$data = mysqli_fetch_assoc($result);
+				$this->id=$data['nim'];
+				$this->name=$data['name'];
+				$this->email=$data['email'];
+				$this->password=$data['pass'];
+				$this->id_role=$data['id_role'];
+				$this->role=$data['nama_role'];
+				$this->status=$data['status'];
+				$this->notelp=$data['notelp'];
+				$this->sex=$data['sex'];
+				$this->foto=$data['foto'];
+				$this->bio=$data['bio'];
+			}
+		}
+
 		public function SelectUserByMail($mail){
 			$this->connect();
 			$sql = "SELECT a.*, b.nama as nama_role, c.nama as nama_ukm from user a, role b, ukm c where a.id_role = b.id_role AND a.id_ukm = c.id_ukm AND email='$mail' order by nim";

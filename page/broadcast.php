@@ -65,7 +65,7 @@
                           $status = '<button class="btn btn-warning"><i class="fas fa-clock"></i> Pending</button>';
                         }
                         else if($bcObj->status == 'r'){
-                          $status = '<button class="btn btn-danger"><i class="fas fa-close"></i> Reject</button>';
+                          $status = '<button class="btn btn-danger"><i class="fas fa-ban"></i> Rejected</button>';
                         }
                         else if($bcObj->status == 'a'){
                           $status = '<button class="btn btn-success"><i class="fas fa-check"></i> Approved</button>';
