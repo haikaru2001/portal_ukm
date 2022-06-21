@@ -82,9 +82,10 @@ class Broadcast extends koneksi{
 
     }
 
-    public function getAllBroadcastMe($me)
+    public function getAllBroadcastMe()
     {
-        $sql = "SELECT b.*, u.name as nama FROM broadcast b INNER JOIN user u ON b.pengirim = u.nim WHERE pengirim='$me'";
+        $this->connect();
+        $sql = "SELECT b.*, u.name as nama FROM broadcast b INNER JOIN user u ON b.pengirim = u.nim WHERE pengirim='$this->id'";
         $result = mysqli_query($this->connection, $sql) or die(mysqli_error($this->connection));
 		$arrResult = Array();
 		$i=0;
@@ -102,8 +103,11 @@ class Broadcast extends koneksi{
                 $broadcast->id_ukm = $data['id_ukm'];
                 $broadcast->date = $data['date'];
                 $broadcast->reason = $data['reason'];
+                $arrResult[$i] = $broadcast;
+                $i++;
             }
         }
+        return $arrResult;
     }
 }
 

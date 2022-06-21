@@ -223,6 +223,7 @@ if($_SESSION["id_role"] <> 3 && $_SESSION["id_role"] <> 2){
         </div>
         <div class="info">
           <a href="dashboard-ketua.php?page=profile" class="d-block"><?php echo $objUser->name?></a>
+          <span class="badge badge-info navbar-badge"><?=$objUser->role?></span>
         </div>
       </div>
 
@@ -251,7 +252,7 @@ if($_SESSION["id_role"] <> 3 && $_SESSION["id_role"] <> 2){
           </li>
           
           <li class="nav-item">
-            <a href="dashboard-ketua.php?page=broadcast" class="nav-link">
+            <a href="dashboard-ketua.php?page=broadcast-k" class="nav-link">
               <i class="nav-icon fas fa-envelope"></i>
               <p>
                 Broadcast

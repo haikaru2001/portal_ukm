@@ -224,6 +224,7 @@ else
         </div>
         <div class="info">
           <a href="dashboard-admin.php?page=profile" class="d-block"><?php echo $objUser->name?></a>
+          <span class="badge badge-info navbar-badge"><?=$objUser->role?></span>
         </div>
       </div>
 

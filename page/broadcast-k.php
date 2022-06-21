@@ -29,7 +29,8 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>ID</th>
+                    <th>#</th>
+                    <th>ID_BC</th>
                     <th>pengirim</th>
                     <th>judul</th>
                     <th>isi</th>
@@ -46,10 +47,9 @@
                     include_once('class/class.Ukm.php');
                     include_once('class/class.User.php');
                     include_once('class/class.Broadcast.php');
-                    $objUkm = new Ukm();
-                    $objUser = new User();
                     $bc = new Broadcast();
-                    $arrayResult = $bc->getAllBroadcast();
+                    $bc->id = $_SESSION['userid'];
+                    $arrayResult = $bc->getAllBroadcastMe();
                     
                     if(count($arrayResult) == 0){
                       echo '<tr><td colspan="9">Belum ada pesan!</td></tr>';			
@@ -68,6 +68,7 @@
                           $status = '<button class="btn btn-success"><i class="fas fa-check"></i> Approved</button>';
                         }
                         echo '<tr>';
+                          echo '<td>'.$no.'</td>';
                           echo '<td>'.$id.'</td>';	
                           echo '<td>'.$bcObj->namapengirim.'</td>';
                           echo '<td>'.$bcObj->judul.'</td>';
@@ -77,7 +78,7 @@
                           echo '<td>'.$bcObj->date.'</td>';
                           
                         ?>
-                          <td><a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ModalEdit<?php echo $bcObj->id; ?>"><i class="fas fa-edit"></i> Edit</a> | <a class="btn btn-danger btn-sm" href="dashboard-admin.php?page=delete-ukm&id_ukm=<?php echo $id;?>" name="delete" onclick="return confirm('Apakah anda yakin ingin menghapus?')"><i class="fas fa-trash"></i> Delete</a></td>
+                          <td><a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ModalEdit<?php echo $bcObj->id; ?>"><i class="fas fa-edit"></i> Edit</a> | <a class="btn btn-danger btn-sm" href="dashboard-ketua.php?page=delete-bc&id_bc=<?php echo $id;?>" name="delete" onclick="return confirm('Apakah anda yakin ingin menghapus?')"><i class="fas fa-trash"></i> Delete</a></td>
                         
                         <?php
                           echo '<td>'.$bcObj->reason.'</td>';
@@ -103,7 +104,7 @@
                                     </div>
                                     <div class="form-group">
                                       <label>Isi</label>
-                                      <textarea name="isi" class="form-control" placeholder="isi Pesan"><?=$bcObj->id; ?></textarea>
+                                      <textarea name="isi" class="form-control" placeholder="isi Pesan"><?=$bcObj->isi; ?></textarea>
                                     </div>
                                     <div class="form-group">
                                       <label>Penerima</label>
@@ -178,7 +179,7 @@
                       </div>
                     </div>
                     <div class="modal-footer">  
-                      <a href="dashboard-admin?page=crud-ukm.php"> <button type="submit" class="btn btn-success" name="add">Tambah Ukm</button></a>
+                      <a href="dashboard-admin?page=crud-ukm.php"> <button type="submit" class="btn btn-success" name="add">Tambah Pesan Broadcast</button></a>
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                               </div>
                                 </form>

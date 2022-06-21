@@ -223,6 +223,7 @@ else
         </div>
         <div class="info">
           <a href="dashboard-anggota.php?page=profile" class="d-block"><?php echo $objUser->name?></a>
+          <span class="badge badge-info navbar-badge"><?=$objUser->role?></span>
         </div>
       </div>
 
