@@ -252,7 +252,7 @@ else
           </li>
           
           <li class="nav-item">
-            <a href="dashboard-anggota.php?page=broadcast" class="nav-link">
+            <a href="dashboard-anggota.php?page=broadcast-v" class="nav-link">
               <i class="nav-icon fas fa-envelope"></i>
               <p>
                 See Broadcast

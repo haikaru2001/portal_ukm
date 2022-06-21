@@ -29,7 +29,9 @@
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>ID</th>
+                    <th>No</th>
+                    <th>ID_BC</th>
+                    <th>UKM</th>
                     <th>pengirim</th>
                     <th>judul</th>
                     <th>isi</th>
@@ -52,12 +54,13 @@
                     $arrayResult = $bc->getAllBroadcast();
                     
                     if(count($arrayResult) == 0){
-                      echo '<tr><td colspan="9">Belum ada pesan!</td></tr>';			
+                      echo '<tr><td colspan="11">Belum ada pesan!</td></tr>';			
                     }else{	
                       $no = 1;	
                       foreach ($arrayResult as $bcObj) {
                         $id = $bcObj->id;
                         $status='';
+                        $penerima='';
                         if($bcObj->status == 'p'){
                           $status = '<button class="btn btn-warning"><i class="fas fa-clock"></i> Pending</button>';
                         }
@@ -67,13 +70,25 @@
                         else if($bcObj->status == 'a'){
                           $status = '<button class="btn btn-success"><i class="fas fa-check"></i> Approved</button>';
                         }
+
+                        if($bcObj->penerima == 'a'){
+                          $penerima = "Semua Anggota UKM";
+                        }
+                        else if($bcObj->penerima == 'b'){
+                          $penerima = "Hanya Bendahara UKM";
+                        }
+                        else if($bcObj->penerima == 'k'){
+                          $penerima = "Hanya Anggota UKM";
+                        }
                         echo '<tr>';
-                          echo '<td>'.$id.'</td>';	
+                          echo '<td>'.$no.'</td>';	
+                          echo '<td>'.$id.'</td>';
+                          echo '<td>'.$bcObj->ukm.'</td>';	
                           echo '<td>'.$bcObj->namapengirim.'</td>';
                           echo '<td>'.$bcObj->judul.'</td>';
                           echo '<td>'.$bcObj->isi.'</td>';
                           echo '<td>'.$status.'</td>';
-                          echo '<td>'.$bcObj->penerima.'</td>';
+                          echo '<td>'.$penerima.'</td>';
                           echo '<td>'.$bcObj->date.'</td>';
                           
                         ?>

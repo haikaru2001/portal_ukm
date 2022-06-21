@@ -56,7 +56,7 @@ class Broadcast extends koneksi{
     public function getAllBroadcast()
     {
         $this->connect();
-        $sql = "SELECT b.*, u.name as nama FROM broadcast b INNER JOIN user u ON b.pengirim = u.nim";
+        $sql = "SELECT b.*, a.name as nama_user, c.nama as nama_ukm FROM broadcast b, user a, ukm c where b.pengirim = a.nim AND b.id_ukm = c.id_ukm";
         $result = mysqli_query($this->connection, $sql) or die(mysqli_error($this->connection));
 		$arrResult = Array();
 		$i=0;
@@ -66,7 +66,8 @@ class Broadcast extends koneksi{
                 $broadcast = new Broadcast();
                 $broadcast->id = $data['id_broadcast'];
                 $broadcast->pengirim = $data['pengirim'];
-                $broadcast->namapengirim = $data['nama'];
+                $broadcast->namapengirim = $data['nama_user'];
+                $broadcast->ukm = $data['nama_ukm'];
                 $broadcast->judul = $data['judul'];
                 $broadcast->isi = $data['isi'];
                 $broadcast->status = $data['status'];
@@ -86,6 +87,34 @@ class Broadcast extends koneksi{
     {
         $this->connect();
         $sql = "SELECT b.*, u.name as nama FROM broadcast b INNER JOIN user u ON b.pengirim = u.nim WHERE pengirim='$this->id'";
+        $result = mysqli_query($this->connection, $sql) or die(mysqli_error($this->connection));
+		$arrResult = Array();
+		$i=0;
+		if(mysqli_num_rows($result)>0){
+			while($data = mysqli_fetch_array($result))
+			{
+                $broadcast = new Broadcast();
+                $broadcast->id = $data['id_broadcast'];
+                $broadcast->pengirim = $data['pengirim'];
+                $broadcast->namapengirim = $data['nama'];
+                $broadcast->judul = $data['judul'];
+                $broadcast->isi = $data['isi'];
+                $broadcast->status = $data['status'];
+                $broadcast->penerima = $data['penerima'];
+                $broadcast->id_ukm = $data['id_ukm'];
+                $broadcast->date = $data['date'];
+                $broadcast->reason = $data['reason'];
+                $arrResult[$i] = $broadcast;
+                $i++;
+            }
+        }
+        return $arrResult;
+    }
+
+    public function getAllBroadcastApproved()
+    {
+        $this->connect();
+        $sql = "SELECT b.*, u.name as nama FROM broadcast b INNER JOIN user u ON b.pengirim = u.nim WHERE b.status = 'a' AND b.id_ukm = $this->id_ukm";
         $result = mysqli_query($this->connection, $sql) or die(mysqli_error($this->connection));
 		$arrResult = Array();
 		$i=0;

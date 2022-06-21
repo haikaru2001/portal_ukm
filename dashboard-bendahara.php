@@ -254,6 +254,15 @@ else
               </p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="dashboard-bendahara.php?page=broadcast-v" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Broadcast
+              </p>
+            </a>
+          </li>
           
           <li class="nav-item">
             <a href="dashboard-bendahara.php?page=kas" class="nav-link">

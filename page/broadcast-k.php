@@ -48,16 +48,17 @@
                     include_once('class/class.User.php');
                     include_once('class/class.Broadcast.php');
                     $bc = new Broadcast();
-                    $bc->id = $_SESSION['userid'];
+                    $bc->pengirim = $_SESSION['userid'];
                     $arrayResult = $bc->getAllBroadcastMe();
                     
                     if(count($arrayResult) == 0){
-                      echo '<tr><td colspan="9">Belum ada pesan!</td></tr>';			
+                      echo '<tr><td colspan="10">Belum ada pesan!</td></tr>';			
                     }else{	
                       $no = 1;	
                       foreach ($arrayResult as $bcObj) {
                         $id = $bcObj->id;
                         $status='';
+                        $penerima='';
                         if($bcObj->status == 'p'){
                           $status = '<button class="btn btn-warning"><i class="fas fa-clock"></i> Pending</button>';
                         }
@@ -67,6 +68,16 @@
                         else if($bcObj->status == 'a'){
                           $status = '<button class="btn btn-success"><i class="fas fa-check"></i> Approved</button>';
                         }
+                        
+                        if($bcObj->penerima == 'a'){
+                          $penerima = "Semua Anggota UKM";
+                        }
+                        else if($bcObj->penerima == 'b'){
+                          $penerima = "Hanya Bendahara UKM";
+                        }
+                        else if($bcObj->penerima == 'k'){
+                          $penerima = "Hanya Anggota UKM";
+                        }
                         echo '<tr>';
                           echo '<td>'.$no.'</td>';
                           echo '<td>'.$id.'</td>';	
@@ -74,13 +85,19 @@
                           echo '<td>'.$bcObj->judul.'</td>';
                           echo '<td>'.$bcObj->isi.'</td>';
                           echo '<td>'.$status.'</td>';
-                          echo '<td>'.$bcObj->penerima.'</td>';
+                          echo '<td>'.$penerima.'</td>';
                           echo '<td>'.$bcObj->date.'</td>';
+                          
+                          if($bcObj->status == 'p'){
                           
                         ?>
                           <td><a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ModalEdit<?php echo $bcObj->id; ?>"><i class="fas fa-edit"></i> Edit</a> | <a class="btn btn-danger btn-sm" href="dashboard-ketua.php?page=delete-bc&id_bc=<?php echo $id;?>" name="delete" onclick="return confirm('Apakah anda yakin ingin menghapus?')"><i class="fas fa-trash"></i> Delete</a></td>
                         
                         <?php
+                          }
+                          else {
+                            echo '<td>Tidak bisa melakukan perubahan</td>';
+                          }
                           echo '<td>'.$bcObj->reason.'</td>';
                         ?>
                         </tr>
@@ -116,7 +133,7 @@
                                           Hanya Bendahara
                                         </option>
                                         <option value="k">
-                                          Hanya anggota
+                                          Hanya Anggota
                                         </option>
                                       </select>
                                     </div>
