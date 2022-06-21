@@ -77,52 +77,10 @@
                           echo '<td>'.$dataUser->role.'</td>';
                           echo '<td>'.$status.'</td>';
 
-                        if($_SESSION['id_role'] == 1){
+                        
                         ?>
                           <td><a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ModalEdit<?php echo $id; ?>"><i class="fas fa-edit"></i> Edit</a> | <a class="btn btn-danger btn-sm" href="dashboard-admin.php?page=delete-user&id_user=<?php echo $id;?>" name="delete" onclick="return confirm('Apakah anda yakin ingin menghapus?')"><i class="fas fa-trash"></i> Delete</a></td>
                         </tr>
-                        <?php
-                        }
-                        else{
-                          ?>
-                          <td><a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ModalPromote<?php echo $id; ?>"><i class="fas fa-edit"></i> Promote</a>
-                        <?php
-                        }
-                        ?>
-
-                        <!-- Modal Promote -->
-                        <div class="modal fade" id="ModalPromote<?php echo $id; ?>" role="dialog">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h4 class="modal-title">Promote User</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                              </div>
-                              <form role="form" method="get" action="page/crud-user.php">
-                              <div class="modal-body"></div>
-                                  <div class="form-group">
-                                    <label>Nama</label>
-                                    <input type="text" name="nama_user" class="form-control" value="<?php echo $dataUser->name; ?>" placeholder="Nama Lengkap" disabled>
-                                  </div>
-                                  <div class="form-group">
-                                    <label>Role</label>
-                                    <select name="role" class="form-control">
-                                      <?php
-                                      foreach ($listrole as $dataRole) {
-                                        echo '<option value='.$dataRole->id.'>'.$dataRole->role.'</option>';
-                                      }
-                                      ?>
-                                    </select>    
-                                  </div>
-                              </div>
-                              <div class="modal-footer">  
-                                <a href="dashboard-ketua?page=crud-user.php"><button type="submit" class="btn btn-success" name="promote">Promote</button></a>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              </div>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
 
                         <!-- Modal Edit User-->
                         <div class="modal fade" id="ModalEdit<?php echo $id; ?>" role="dialog">
@@ -134,10 +92,8 @@
                               </div>
                               <div class="modal-body">
                                 <form role="form" method="get" action="page/crud-user.php">
-                                  <div class="form-group">
-                                    <label>NIM</label>
-                                    <input type="text" name="nim" class="form-control" value="<?php echo $id; ?>">      
-                                  </div>
+                                    <input type="text" name="nim" class="form-control" value="<?php echo $id; ?>" hidden>      
+
                                   <div class="form-group">
                                     <label>Nama User</label>
                                     <input type="text" name="nama_user" class="form-control" value="<?php echo $dataUser->name; ?>" placeholder="Nama Lengkap">      
@@ -160,6 +116,7 @@
                                   <div class="form-group">
                                     <label>UKM</label>
                                     <select name="ukm" class="form-control">
+                                      <option>--pilih--</option>
                                       <?php
                                       foreach ($listukm as $dataUkm) {
                                         echo '<option value='.$dataUkm->id.'>'.$dataUkm->ukm.'</option>';
