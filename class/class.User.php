@@ -61,7 +61,7 @@
 			
 		}
 		public function EditProfile(){
-			$sql = "UPDATE user SET nim='$this->id', name='$this->name', email='$this->email', sex='$this->sex', notelp='$this->notelp', id_ukm=$this->id_ukm, id_role=$this->id_role, foto='$this->foto', bio = '$this->bio' WHERE nim='$this->id'";
+			$sql = "UPDATE user SET name='$this->name', email='$this->email', sex='$this->sex', notelp='$this->notelp', foto='$this->foto', bio = '$this->bio' WHERE nim='$this->id'";
 			$this->hasil = mysqli_query($this->connection, $sql);
 
 			if($this->hasil)

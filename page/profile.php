@@ -31,7 +31,7 @@
                   else{
                   $objUser->SelectUserByNim($_SESSION["userid"]);
                   }
-                  
+
                   $foto='';
                   $icon='';
                   $gender='';
@@ -170,9 +170,13 @@
                     <input type="hidden" name="nim" class="form-control" value="<?=$objUser->id?>">
                     <input type="hidden" name="role" class="form-control" value="<?=$objUser->id_role?>">
                     <input type="hidden" name="ukm" class="form-control" value="<?=$objUser->id_ukm?>">
+                    
                     <div class="form-group">
                         <label>Foto</label>
-                        <input type="file" name="foto" class="form-control">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" name="foto">
+                          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        </div>
                         <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg</p>      
                     </div>
                     <div class="form-group">

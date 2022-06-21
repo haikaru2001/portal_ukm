@@ -22,7 +22,6 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                </br><a class="btn btn-primary" data-toggle="modal" data-target="#ModalAdd"> Add User</a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">

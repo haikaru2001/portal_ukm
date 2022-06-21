@@ -44,8 +44,7 @@
                   </thead>
                   <tbody>
                     <?php 
-                    include_once('class/class.Ukm.php');
-                    include_once('class/class.User.php');
+
                     include_once('class/class.Broadcast.php');
                     $bc = new Broadcast();
                     $bc->pengirim = $_SESSION['userid'];
@@ -63,7 +62,7 @@
                           $status = '<button class="btn btn-warning"><i class="fas fa-clock"></i> Pending</button>';
                         }
                         else if($bcObj->status == 'r'){
-                          $status = '<button class="btn btn-danger"><i class="fas fa-ban"></i> Reject</button>';
+                          $status = '<button class="btn btn-danger"><i class="fas fa-ban"></i> Rejected</button>';
                         }
                         else if($bcObj->status == 'a'){
                           $status = '<button class="btn btn-success"><i class="fas fa-check"></i> Approved</button>';

@@ -86,7 +86,7 @@ class Broadcast extends koneksi{
     public function getAllBroadcastMe()
     {
         $this->connect();
-        $sql = "SELECT b.*, u.name as nama FROM broadcast b INNER JOIN user u ON b.pengirim = u.nim WHERE pengirim='$this->id'";
+        $sql = "SELECT b.*, u.name as nama FROM broadcast b INNER JOIN user u ON b.pengirim = u.nim WHERE pengirim='$this->pengirim'";
         $result = mysqli_query($this->connection, $sql) or die(mysqli_error($this->connection));
 		$arrResult = Array();
 		$i=0;
