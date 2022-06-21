@@ -14,7 +14,9 @@
 <script src="plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
 <script src="plugins/raphael/raphael.min.js"></script>
 <!-- ChartJS -->
-<script src="plugins/chart.js/Chart.min.js"></script>
+<script src="plugins/chart.js/Chart.js"></script>
+<script src="dist/js/demo.js"></script>
+<script src="dist/js/pages/dashboard3.js"></script>
 <!-- Sweetalert -->
 <script src="plugins/sweetalert2/sweetalert2.all.min.js"></script>
 <!-- DataTables  & Plugins -->
@@ -36,7 +38,7 @@
 $(document).ready( function () {
     bsCustomFileInput.init()
 
-  $('.table').DataTable({
+  $('.table1').DataTable({
       "paging": true,
       "lengthChange": true,
       "searching": true,
@@ -46,6 +48,7 @@ $(document).ready( function () {
       "responsive": true,
       "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('.col-md-6:eq(0)');
+    
 
 });
 

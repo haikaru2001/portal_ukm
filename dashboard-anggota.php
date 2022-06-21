@@ -279,7 +279,7 @@ else
 						echo 'Halaman tidak ditemukan! :(';
 					}
 				} else {
-					include($pages_dir.'/home.php');
+					include($pages_dir.'/home-anggota.php');
 				}
 		?>
  

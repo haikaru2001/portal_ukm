@@ -30,7 +30,6 @@
                   <thead>
                   <tr>
                     <th>No</th>
-                    <th>ID_BC</th>
                     <th>UKM</th>
                     <th>pengirim</th>
                     <th>judul</th>
@@ -72,17 +71,16 @@
                         }
 
                         if($bcObj->penerima == 'a'){
-                          $penerima = "Semua Anggota UKM";
+                          $penerima = "Semua Anggota UKM ".$bcObj->ukm;
                         }
                         else if($bcObj->penerima == 'b'){
-                          $penerima = "Hanya Bendahara UKM";
+                          $penerima = "Hanya Bendahara UKM ".$bcObj->ukm;
                         }
                         else if($bcObj->penerima == 'k'){
-                          $penerima = "Hanya Anggota UKM";
+                          $penerima = "Hanya Anggota UKM ".$bcObj->ukm;
                         }
                         echo '<tr>';
                           echo '<td>'.$no.'</td>';	
-                          echo '<td>'.$id.'</td>';
                           echo '<td>'.$bcObj->ukm.'</td>';	
                           echo '<td>'.$bcObj->namapengirim.'</td>';
                           echo '<td>'.$bcObj->judul.'</td>';
