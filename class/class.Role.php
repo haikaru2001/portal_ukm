@@ -69,6 +69,25 @@
 			}
 			return $arrResult;			
 		}
+
+		public function SelectRole($id){
+			$sql = "SELECT * FROM role where id_role > $id";
+				
+			$result = mysqli_query($this->connection, $sql);	
+			$arrResult = Array();
+			$cnt=0;
+			if(mysqli_num_rows($result) > 0){				
+				while ($data = mysqli_fetch_array($result))
+				{
+					$objRole = new Role(); 
+					$objRole->id=$data['id_role'];
+					$objRole->role=$data['nama'];
+					$arrResult[$cnt] = $objRole;
+					$cnt++;
+				}
+			}
+			return $arrResult;			
+		}
 		
 		public function SelectOneRole(){
 			$sql = "SELECT * FROM role WHERE id_role='$this->id'";

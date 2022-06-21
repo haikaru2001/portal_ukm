@@ -9,16 +9,13 @@ if(!isset($_SESSION["id_role"])){
 	echo "<script> alert('Silakan Login untuk mengakses halaman ini'); </script>";
 	echo '<script> window.location="index.php"; </script>';
 }
-else
-{
-	if($_SESSION["id_role"]!=1){
-		echo "<script> alert('Hanya admin yang dapat mengakses halaman ini'); </script>";
+
+if($_SESSION["id_role"] <> 3 && $_SESSION["id_role"] <> 2){
+		echo "<script> alert('Hanya ketua atau wakil yang dapat mengakses halaman ini'); </script>";
 		echo '<script> window.location="index.php"; </script>';
-	}
 }
 
 ?>
-
 <?php
   include('class/class.User.php');
   $objUser = new User();
@@ -31,8 +28,9 @@ else
   else if($objUser->sex == 'P'){
     $foto = 'avatar2.png';
   }
-  ?>
 
+  
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,7 +69,7 @@ else
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="dashboard-admin.php" class="nav-link">Home</a>
+        <a href="dashboard-ketua.php" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="contact.php" class="nav-link">Contact</a>
@@ -112,7 +110,7 @@ else
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="dist/img/<?=$foto?>" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Brad Diesel
@@ -194,11 +192,11 @@ else
         </a>
         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
           
-          <a href="dashboard-admin.php?page=profile" class="dropdown-item">
-            <i class="fas fa-user mr-2"></i> Profile
+          <a href="dashboard-ketua.php?page=profile" class="dropdown-item">
+            <i class="fas fa-user mr-2"></i> Profile <?= $_SESSION["id_role"];?>
           </a>
           <div class="dropdown-divider"></div>
-          <a href="dashboard-admin.php?page=logout" class="dropdown-item" onclick="<?=$objUser->logoutUser()?>">
+          <a href="dashboard-ketua.php?page=logout" class="dropdown-item" onclick="<?=$objUser->logoutUser()?>">
             <i class="fas fa-power-off mr-2"></i> LogOut
           </a>
           
@@ -207,6 +205,7 @@ else
     </ul>
   </nav>
   <!-- /.navbar -->
+  
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -223,7 +222,7 @@ else
           <img src="dist/img/<?=$foto?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="dashboard-admin.php?page=profile" class="d-block"><?php echo $objUser->name?></a>
+          <a href="dashboard-ketua.php?page=profile" class="d-block"><?php echo $objUser->name?></a>
         </div>
       </div>
 
@@ -233,7 +232,7 @@ else
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="dashboard-admin.php" class="nav-link active">
+            <a href="dashboard-ketua.php" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -241,32 +240,18 @@ else
               </p>
             </a>
           </li>
+
           <li class="nav-item">
-            <a href="dashboard-admin.php?page=list-ukm" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                UKM
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="dashboard-admin.php?page=list-user" class="nav-link">
+            <a href="dashboard-ketua.php?page=list-user-k" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 User
               </p>
             </a>
           </li>
+          
           <li class="nav-item">
-            <a href="dashboard-admin.php?page=list-role" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Role
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="dashboard-admin.php?page=broadcast" class="nav-link">
+            <a href="dashboard-ketua.php?page=broadcast" class="nav-link">
               <i class="nav-icon fas fa-envelope"></i>
               <p>
                 Broadcast
@@ -274,7 +259,7 @@ else
             </a>
           </li>
           <li class="nav-item bg-danger">
-            <a href="dashboard-admin.php?page=logout" class="nav-link" onclick="<?=$objUser->logoutUser()?>">
+            <a href="dashboard-ketua.php?page=logout" class="nav-link" onclick="<?=$objUser->logoutUser()?>">
             <i class="nav-icon fas fa-power-off"></i>
               <p>
                 LogOut
@@ -305,7 +290,7 @@ else
 						echo 'Halaman tidak ditemukan! :(';
 					}
 				} else {
-					include($pages_dir.'/home-admin.php');
+					include($pages_dir.'/home.php');
 				}
 		?>
  

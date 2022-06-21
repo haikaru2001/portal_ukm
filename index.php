@@ -9,21 +9,22 @@
 <body>
     <?php 
     if (!isset($_SESSION)) {
+		// echo '<script>window.location = "page/login.php";</script>';
 		session_start();
-        echo '<script>window.location = "page/login.php";</script>';
 	}
 	if(isset($_SESSION["id_role"])){		
 		if($_SESSION["id_role"] == 1)
 			echo '<script>window.location = "dashboard-admin.php";</script>';
-		else if($_SESSION["id_yrole"] == 2)
+		else if($_SESSION["id_role"] == 2 || $_SESSION["id_role"] == 3)
 			echo '<script>window.location = "dashboard-ketua.php";</script>';
-        else if($_SESSION["id_yrole"] == 3)
-			echo '<script>window.location = "dashboard-wakil.php";</script>';
-		else if($_SESSION["id_yrole"] == 4)
+		else if($_SESSION["id_role"] == 4)
 			echo '<script>window.location = "dashboard-bendahara.php";</script>';
-        else if($_SESSION["id_yrole"] == 5)
+        else if($_SESSION["id_role"] == 5)
 			echo '<script>window.location = "dashboard-anggota.php";</script>';
-	}	
+	}
+	else{
+		echo '<script>window.location = "page/login.php";</script>';
+	}
  	require "inc.koneksi.php";
     
     ?>

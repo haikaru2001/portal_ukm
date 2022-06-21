@@ -2,15 +2,16 @@
 require('../inc.koneksi.php');
 require_once('../class/class.User.php');
 // $user = new User();
-// $user->email = 'udin123@gmail.com';
-// $user->id = '12345';
+// $user->email = 'adm.ukmms165@gmail.com';
+// $user->id = 'admin1';
 // $user->name = 'udin';
-// $password = 'udin123';
+// $password = 'admin123';
 // $user->password = password_hash($password, PASSWORD_DEFAULT);
 // $user->id_role = 5;
 // $user->sex = 'L';
 // $user->telp = '9817233';
 // $user->AddUser();
+// $user->changePassword();
 
 // if($user->hasil){
 //   echo "<script> alert('Registrasi berhasil'); </script>";
@@ -30,25 +31,25 @@ if(isset($_POST['btnLogin'])){
 			if (!isset($_SESSION)) {
 				session_start();
 			}		  			
-		
+      $objUser->loginUser();
 			$_SESSION["userid"]= $objUser->id;
 			$_SESSION["id_ukm"]= $objUser->id_ukm;
+      $_SESSION["nama_ukm"]= $objUser->ukm;
 			$_SESSION["id_role"]= $objUser->id_role;
+      $_SESSION["nama_role"]= $objUser->role;
 			$_SESSION["name"]= $objUser->name;
-			$_SESSION["email"]= $objUser->email;		
+			$_SESSION["email"]= $objUser->email;
+      
 			
-			echo "<script>alertSucces('Login sukses');</script>";		
 				
 			if(isset($_SESSION["id_role"])){		
         if($_SESSION["id_role"] == 1)
           echo '<script>window.location = "../dashboard-admin.php";</script>';
-        else if($_SESSION["id_role"] == 2)
+        else if($_SESSION["id_role"] == 2 ||$_SESSION["id_role"] == 3)
           echo '<script>window.location = "../dashboard-ketua.php";</script>';
-            else if($_SESSION["id_role"] == 3)
-          echo '<script>window.location = "../dashboard-wakil.php";</script>';
         else if($_SESSION["id_role"] == 4)
           echo '<script>window.location = "../dashboard-bendahara.php";</script>';
-            else if($_SESSION["id_role"] == 5)
+        else if($_SESSION["id_role"] == 5)
           echo '<script>window.location = "../dashboard-anggota.php";</script>';
       }	
 		}
@@ -61,17 +62,6 @@ if(isset($_POST['btnLogin'])){
 	} 	
 }  
 ?>
-<script>
-  let messege;
-  function alertSucces(messege){
-    swal({
-      title: "Berhasil!",
-      text: messege,
-      icon: "success",
-      button: true
-    });
-  }
-</script>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -129,7 +119,7 @@ if(isset($_POST['btnLogin'])){
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block" name="btnLogin" onclick="alertSucces('Berhasil Login')">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-block" name="btnLogin" onclick="">Sign In</button>
           </div>
           <!-- /.col -->
         </div>

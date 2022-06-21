@@ -54,7 +54,7 @@
                           echo '<td>'.$dataUkm->ukm.'</td>';
                           echo '<td>'.$objUser->countUserByUkm($dataUkm->id).' Orang</td>';
                         ?>
-                          <td><a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ModalEdit<?php echo $dataUkm->id; ?>">Edit</a> | <a class="btn btn-danger btn-sm" href="dashboard-admin.php?page=delete-ukm&id_ukm=<?php echo $id;?>" name="delete" onclick="return confirm('Apakah anda yakin ingin menghapus?')">Delete</a></td>
+                          <td><a class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ModalEdit<?php echo $dataUkm->id; ?>"><i class="fas fa-edit"></i> Edit</a> | <a class="btn btn-danger btn-sm" href="dashboard-admin.php?page=delete-ukm&id_ukm=<?php echo $id;?>" name="delete" onclick="return confirm('Apakah anda yakin ingin menghapus?')"><i class="fas fa-trash"></i> Delete</a></td>
                         </tr>
 
                         <!-- Modal Edit UKM-->
